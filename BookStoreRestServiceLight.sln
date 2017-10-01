@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStoreRestServiceLight", "BookStoreRestServiceLight\BookStoreRestServiceLight.csproj", "{12902347-4046-4E55-99AC-C6F5A8A20028}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStoreRestServiceLightTests", "BookStoreRestServiceLightTests\BookStoreRestServiceLightTests.csproj", "{02F31CFD-26DD-4289-A4B0-4ED48CC8811D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{12902347-4046-4E55-99AC-C6F5A8A20028}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12902347-4046-4E55-99AC-C6F5A8A20028}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12902347-4046-4E55-99AC-C6F5A8A20028}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02F31CFD-26DD-4289-A4B0-4ED48CC8811D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02F31CFD-26DD-4289-A4B0-4ED48CC8811D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02F31CFD-26DD-4289-A4B0-4ED48CC8811D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02F31CFD-26DD-4289-A4B0-4ED48CC8811D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
