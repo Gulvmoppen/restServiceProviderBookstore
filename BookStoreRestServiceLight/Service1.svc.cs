@@ -1,33 +1,92 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.ServiceModel.Web;
-using System.Text;
 
 namespace BookStoreRestServiceLight
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
-    // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
-    public class Service1 : IService1
+   public class BookStoreService : IBookstoreService
     {
-        public string GetData(int value)
+        private static readonly IList<Book> Books = new List<Book>();
+        private static int _nextId = 4;
+
+        static BookStoreService()
         {
-            return string.Format("You entered: {0}", value);
+            Book firstBook = new Book
+            {
+                Id = 1,
+                Title = "C# 5.0",
+                Publisher = "Wrox",
+                Author = "Nagel",
+                Price = 123.45
+            };
+            Books.Add(firstBook);
+            Books.Add(new Book
+            {
+                Id = 2,
+                Title = "Beginning Android 4 Application Development",
+                Publisher = "Wrox",
+                Author = "Wei-Meng Lee",
+                Price = 39.99
+            });
+            Books.Add(new Book
+            {
+                Id = 3,
+                Title = "Android Application Development in 24 Hours",
+                Publisher = "Sams",
+                Author = "Carmen Delessio",
+                Price = 49.99
+            });
         }
 
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
+        public IList<Book> GetBooks()
         {
-            if (composite == null)
-            {
-                throw new ArgumentNullException("composite");
-            }
-            if (composite.BoolValue)
-            {
-                composite.StringValue += "Suffix";
-            }
-            return composite;
+            return Books;
+        }
+
+        public Book GetBook(string id)
+        {
+            int idNumber = int.Parse(id);
+            return Books.FirstOrDefault(book => book.Id == idNumber);
+        }
+
+        public string GetBookTitle(string id)
+        {
+            Book book = GetBook(id);
+            if (book == null) return null;
+            return book.Title;
+        }
+
+        public IEnumerable<Book> GetBooksByTite(string titleFragment)
+        {
+            // http://stackoverflow.com/questions/444798/case-insensitive-containsstring
+            return Books.Where(book => book.Title.ToLower().Contains(titleFragment.ToLower()));
+        }
+
+        public Book AddBook(Book book)
+        {
+            //book.Id = new Random().Next(100);
+            book.Id = _nextId++;
+            Books.Add(book);
+            return book;
+        }
+
+        public Book UpdateBook(string id, Book book)
+        {
+            int idNumber = int.Parse(id);
+            Book existingBook = Books.FirstOrDefault(b => b.Id == idNumber);
+            if (existingBook == null) return null;
+            existingBook.Title = book.Title;
+            existingBook.Publisher = book.Publisher;
+            existingBook.Author = book.Author;
+            return existingBook;
+        }
+
+        public Book DeleteBook(string id)
+        {
+            Book book = GetBook(id);
+            if (book == null) return null;
+            bool removed = Books.Remove(book);
+            if (removed) return book;
+            return null;
         }
     }
 }
