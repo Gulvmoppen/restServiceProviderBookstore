@@ -8,9 +8,9 @@ namespace BookStoreRestServiceLight
     [ServiceContract]
     public interface IBookstoreService
     {
-        [OperationContract]
+        [OperationContract]   
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json,
-            UriTemplate = "books/")]
+            UriTemplate = "books")]
         IList<Book> GetBooks();
 
         [OperationContract]
@@ -32,7 +32,7 @@ namespace BookStoreRestServiceLight
         [WebInvoke(Method = "POST",
             RequestFormat = WebMessageFormat.Json,
             ResponseFormat = WebMessageFormat.Json,
-            BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "books/")]
+            BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "books")]
         Book AddBook(Book book);
 
         [OperationContract]
